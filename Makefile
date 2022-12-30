@@ -1,11 +1,11 @@
 CFLAGS = -Wall -std=c99
-LFLAGS = -lm
+LIBS = -lm
 CC = gcc
 
 all: overlay
 
 overlay: main.o logic.o sh.o
-	$(CC) $(LFLAGS) main.o logic.o sh.o -o overlay
+	$(CC) $(LFLAGS) main.o logic.o sh.o -o overlay $(LIBS)
 
 main.o: main.c logic.h
 	$(CC) $(CFLAGS) -c main.c
@@ -20,5 +20,5 @@ clean:
 	rm -f main.o logic.o sh.o overlay
 
 tests: overlay
-	make -C test_cases clean
-	make -C test_cases
+	$(MAKE) -C test_cases clean
+	$(MAKE) -C test_cases
